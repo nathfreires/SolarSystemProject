@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      h1 {
+        text-align: center;
+        color: #c2c2c2;
+      }
+      h2 {
+        text-align: center;
+        color: #c2c2c2;
+      }
+      h3 {
+        text-align: center;
+        font-size: 150%;
+        color: #c2c2c2;
+        margin-top: 40px;
+      }
+      button {
+        display: block;
+        margin: 0 auto;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      #section1 {
+        height: 850px;
+      }
+
+      #section2 {
+        height: 700px;
+      }
+      .cards-list {
+        z-index: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .card {
+        margin: 30px 30px;
+        width: 305px;
+        height: 300px;
+        border-radius: 40px;
+        box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25),
+          -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        cursor: pointer;
+        transition: 0.4s;
+      }
+
+      .card .card_image {
+        width: inherit;
+        height: inherit;
+        border-radius: 40px;
+      }
+
+      .card .card_image img {
+        width: inherit;
+        height: inherit;
+        border-radius: 40px;
+        object-fit: cover;
+      }
+       {
+        text-align: center;
+        border-radius: 0px 0px 40px 40px;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        margin-top: -80px;
+        height: 40px;
+      }
+      .card:hover {
+        transform: scale(0.9, 0.9);
+        box-shadow: 5px 5px 30px 15px rgba(80, 80, 80, 0.25),
+          -5px -5px 30px 15px rgba(89, 89, 89, 0.22);
+      }
+
+      @media all and (max-width: 500px) {
+        .card-list {
+          /* On small screens, we are no longer using row direction but column */
+          flex-direction: column;
+        }
+      }
+
+      .bg {
+        background: rgb(29, 28, 28);
+        background-size: cover;
+        height: 1500%;
+        width: 1000%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -3;
+      }
+
+      .bg:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: #000;
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+      }
+
+      @keyframes sf-fly-by-1 {
+        from {
+          transform: translateZ(-300px);
+          opacity: 0.5;
+        }
+        to {
+          transform: translateZ(0);
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes sf-fly-by-2 {
+        from {
+          transform: translateZ(-1200px);
+          opacity: 0.5;
+        }
+        to {
+          transform: translateZ(-600px);
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes sf-fly-by-3 {
+        from {
+          transform: translateZ(-1800px);
+          opacity: 0.5;
+        }
+        to {
+          transform: translateZ(-1200px);
+          opacity: 0.5;
+        }
+      }
+
+      .star-field {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        perspective: 600px;
+        -webkit-perspective: 600px;
+        z-index: -1;
+      }
+
+      .star-field .layer {
+        box-shadow: -411px -476px #cccccc, 777px -407px #d4d4d4,
+          -387px -477px #fcfcfc, -91px -235px #d4d4d4, 491px -460px #f7f7f7,
+          892px -128px #f7f7f7, 758px -277px #ededed, 596px 378px #cccccc,
+          647px 423px whitesmoke, 183px 389px #c7c7c7, 524px -237px #f0f0f0,
+          679px -535px #e3e3e3, 158px 399px #ededed, 157px 249px #ededed,
+          81px -450px #ebebeb, 719px -360px #c2c2c2, -499px 473px #e8e8e8,
+          -158px -349px #d4d4d4, 870px -134px #cfcfcf, 446px 404px #c2c2c2,
+          440px 490px #d4d4d4, 414px 507px #e6e6e6, -12px 246px #fcfcfc,
+          -384px 369px #e3e3e3, 641px -413px #fcfcfc, 822px 516px #dbdbdb,
+          449px 132px #c2c2c2, 727px 146px #f7f7f7, -315px -488px #e6e6e6,
+          952px -70px #e3e3e3, -869px -29px #dbdbdb, 502px 80px #dedede,
+          764px 342px #e0e0e0, -150px -380px #dbdbdb, 654px -426px #e3e3e3,
+          -325px -263px #c2c2c2, 755px -447px #c7c7c7, 729px -177px #c2c2c2,
+          -682px -391px #e6e6e6, 554px -176px #ededed, -85px -428px #d9d9d9,
+          714px 55px #e8e8e8, 359px -285px #cfcfcf, -362px -508px #dedede,
+          468px -265px #fcfcfc, 74px -500px #c7c7c7, -514px 383px #dbdbdb,
+          730px -92px #cfcfcf, -112px 287px #c9c9c9, -853px 79px #d6d6d6,
+          828px 475px #d6d6d6, -681px 13px #fafafa, -176px 209px #f0f0f0,
+          758px 457px #fafafa, -383px -454px #ededed, 813px 179px #d1d1d1,
+          608px 98px whitesmoke, -860px -65px #c4c4c4, -572px 272px #f7f7f7,
+          459px 533px #fcfcfc, 624px -481px #e6e6e6, 790px 477px #dedede,
+          731px -403px #ededed, 70px -534px #cccccc, -23px 510px #cfcfcf,
+          -652px -237px whitesmoke, -690px 367px #d1d1d1, 810px 536px #d1d1d1,
+          774px 293px #c9c9c9, -362px 97px #c2c2c2, 563px 47px #dedede,
+          313px 475px #e0e0e0, 839px -491px #e3e3e3, -217px 377px #d4d4d4,
+          -581px 239px #c2c2c2, -857px 72px #cccccc, -23px 340px #dedede,
+          -837px 246px white, 170px -502px #cfcfcf, 822px -443px #e0e0e0,
+          795px 497px #e0e0e0, -814px -337px #cfcfcf, 206px -339px #f2f2f2,
+          -779px 108px #e6e6e6, 808px 2px #d4d4d4, 665px 41px #d4d4d4,
+          -564px 64px #cccccc, -380px 74px #cfcfcf, -369px -60px #f7f7f7,
+          47px -495px #e3e3e3, -383px 368px #f7f7f7, 419px 288px #d1d1d1,
+          -598px -50px #c2c2c2, -833px 187px #c4c4c4, 378px 325px whitesmoke,
+          -703px 375px #d6d6d6, 392px 520px #d9d9d9, -492px -60px #c4c4c4,
+          759px 288px #ebebeb, 98px -412px #c4c4c4, -911px -277px #c9c9c9;
+        transform-style: preserve-3d;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        height: 4px;
+        width: 4px;
+        border-radius: 2px;
+      }
+
+      .star-field .layer:nth-child(1) {
+        animation: sf-fly-by-1 20s linear infinite;
+      }
+
+      .star-field .layer:nth-child(2) {
+        animation: sf-fly-by-2 20s linear infinite;
+      }
+
+      .star-field .layer:nth-child(3) {
+        animation: sf-fly-by-3 10s linear infinite;
+      }
+
+      .card_message {
+        display: none;
+        background-color: rgba(255, 255, 255, 0.22);
+        padding: 90px;
+        border-radius: 8%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 100;
+        transition: opacity 0.7s ease-in;
+        font-size: large;
+      }
+
+      .card:hover .card_message {
+        display: block;
+        opacity: 1; /* Change opacity to 1 on hover to make it visible */
+      }
+      footer {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        color: #c2c2c2;
+        padding: 10px;
+        text-align: center;
+        margin-top: 350px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main" id="section1">
+      <h1>Planets of the Solar System</h1>
+      <div class="cards-list">
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Mercury_in_true_color.jpg/1024px-Mercury_in_true_color.jpg"
+            />
+          </div>
+
+          <div class="card_message">
+            <p>Mercury</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped2%29.jpg/800px-PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped2%29.jpg"
+            />
+          </div>
+
+          <div class="card_message">
+            <p>Venus</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_%28remastered%29.jpg/450px-The_Blue_Marble_%28remastered%29.jpg"
+            />
+          </div>
+
+          <div class="card_message">
+            <p>Earth</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Mars_-_August_30_2021_-_Flickr_-_Kevin_M._Gill.png"
+            />
+          </div>
+
+          <div class="card_message">
+            <p>Mars</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg"
+            />
+          </div>
+
+          <div class="card_message">
+            <p>Jupiter</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://cdn.theatlantic.com/media/mt/science/682398main_pia14922-43_946-710.jpeg"
+            />
+          </div>
+
+          <div class="card_message">
+            <p>Saturn</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Uranus_as_seen_by_NASA%27s_Voyager_2_%28remastered%29_-_JPEG_converted.jpg/1024px-Uranus_as_seen_by_NASA%27s_Voyager_2_%28remastered%29_-_JPEG_converted.jpg"
+            />
+          </div>
+
+          <div class="card_message">
+            <p>Uranus</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg/420px-Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg"
+            />
+          </div>
+
+          <div class="card_message">
+            <p>Neptune</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg"></div>
+    <div class="star-field">
+      <div class="layer"></div>
+      <div class="layer"></div>
+      <div class="layer"></div>
+    </div>
+    <div class="main" id="section2">
+      <h2>
+        <p>Why is it Called the Solar System?</p>
+        There are many planetary systems like ours in the universe, with planets
+        orbiting a host star. <br />Our planetary system is called “the solar
+        system” because we use the word “solar” to describe <br />
+        things related to our star, after the Latin word for Sun, "solis".
+      </h2>
+
+      <h3>
+        <p>
+          <br />Want to know a fact about the Solar System? <br />Type a number
+          from 1-6.
+        </p>
+      </h3>
+      <button>Choose number</button>
+      <script>
+        function Numberpicked() {
+          let number = prompt("Pick a number");
+          let h3 = document.querySelector("h3");
+          if (number === "1") {
+            h3.innerHTML =
+              "URANUS SPINS SIDEWAYS <br>Uranus usually appears in classroom solar system models as a featureless blue ball,<br> but this gas giant of the outer solar system is pretty weird on closer inspection.<br> First, the planet rotates on its side, appearing to roll around the sun like a ball, according to NASA's Uranus guide.<br> The most likely explanation for the planet's unusual orientation (about 90 degrees sideways compared to the other planets)<br> is that it underwent some sort of titanic collision in the ancient past.  ";
+          } else if (number === "2") {
+            h3.innerHTML =
+              " SPACECRAFT COULD BRING CONTAMINANTS TO INHABITABLE (OR INHABITED)<br> LOCATIONS IN THE SOLAR SYSTEM";
+          } else if (number === "3") {
+            h3.innerHTML = "MERCURY IS STILL SHRINKING";
+          } else if (number === "4") {
+            h3.innerHTML = "THERE ARE MOUNTAINS ON PLUTO";
+          } else if (number === "5") {
+            h3.innerHTML =
+              "MOST COMETS ARE SPOTTED WITH A SUN-GAZING TELESCOPE";
+          } else if (number === "6") {
+            h3.innerHTML = " The Solar System formed 4.6 Billion years ago";
+          }
+        }
+
+        letNumberButton = document.querySelector("button");
+        letNumberButton.addEventListener("click", Numberpicked);
+      </script>
+      <footer>
+        <p>This page was created by Nath Freires</p>
+      </footer>
+    </div>
+  </body>
+</html>
